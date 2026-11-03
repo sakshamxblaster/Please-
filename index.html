@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chocos, ek minute?</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,400;1,9..144,600&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#F8E6E3;--ink:#2A1418;--soft:#7A4A50;--card:#FFF7F5;--red:#D2223A;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1B1E;--ink:#F6E7E4;--soft:#C9A3A6;--card:#1A2A2E}}
+:root[data-theme="dark"]{--bg:#0F1B1E;--ink:#F6E7E4;--soft:#C9A3A6;--card:#1A2A2E}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.5 "DM Sans",system-ui,sans-serif;-webkit-tap-highlight-color:transparent;overflow:hidden}
+h2,.serif{font-family:Fraunces,Georgia,serif;font-weight:500;letter-spacing:-.01em;margin:0}
+.btn{font:700 15px "DM Sans",sans-serif;border:0;border-radius:99px;padding:12px 20px;background:var(--red);color:#fff;cursor:pointer}
+.btn.ghost{background:transparent;color:inherit;border:1.5px solid currentColor}
+.pg{position:fixed;inset:0;overflow-y:auto;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.in{max-width:480px;margin:0 auto}
+/* part 1 */
+#p1{display:flex;flex-direction:column}
+.top{padding:16px 20px;text-align:center;max-width:480px;margin:auto;width:100%}
+.top h2{font-size:24px;line-height:1.2;font-style:italic;text-wrap:balance}
+.box{position:relative;height:min(40dvh,400px);aspect-ratio:3/4;margin:14px auto 0;border-radius:20px;overflow:hidden;touch-action:manipulation;cursor:crosshair;background:#0E3A7A}
+.box img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.box.hit{animation:shake .32s}
+@keyframes shake{20%{transform:translateX(-14px) rotate(-1.5deg)}50%{transform:translateX(11px) rotate(1deg)}80%{transform:translateX(-5px)}}
+.mark{position:absolute;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;background:radial-gradient(circle,rgba(210,34,58,.6),rgba(210,34,58,0) 68%);pointer-events:none;animation:fi .2s}
+@keyframes fi{from{opacity:0}}
+.hand{position:absolute;font-size:90px;line-height:1;pointer-events:none}
+.row{display:flex;align-items:center;gap:12px;margin-top:12px;text-align:left}
+.row b{font:600 34px Fraunces,Georgia,serif;color:var(--red);min-width:1.3em;text-align:center}
+.msg{flex:1;min-height:76px;display:flex;gap:9px;align-items:flex-start}
+.av{flex:none;width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font:700 13px "DM Sans"}
+.bub{background:var(--card);border-radius:4px 16px 16px 16px;padding:8px 13px;font-size:16px;line-height:1.3;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.bub small{display:block;color:var(--soft);font-size:12px;margin-top:3px}
+.bub.pop{animation:pop .35s}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}}
+#choice{display:none;gap:8px;justify-content:center;margin-top:10px}
+#choice.show{display:flex}
+/* part 2 */
+#p2{display:none;background:#0F1B1E;color:#F6E7E4}
+#p2 .in{padding:56px 20px 70px;text-align:center}
+#p2 h2{font-size:34px;font-style:italic}
+#p2 .sub{color:#C9A3A6;margin:8px 0 46px}
+.blk{margin-bottom:56px}
+.dt{font-size:13px;color:#C9A3A6;margin:0 0 8px}
+.q{font:italic 500 27px/1.3 Fraunces,Georgia,serif;margin:0 0 18px;text-wrap:balance}
+.q mark{background:linear-gradient(transparent 52%,rgba(210,34,58,.7) 52%);color:inherit;padding:0 3px}
+.card{border-radius:16px;overflow:hidden;box-shadow:0 0 0 2px rgba(210,34,58,.8),0 0 36px rgba(210,34,58,.35)}
+.card img{display:block;width:100%;height:auto}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .9s,transform .9s}
+.rv.on{opacity:1;transform:none}
+/* part 3 */
+.wall{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px;margin-bottom:40px}
+.tile{position:relative;padding:0;border:0;background:none;cursor:pointer;aspect-ratio:3/4;border-radius:14px;overflow:hidden;transform:rotate(var(--r));box-shadow:0 0 0 2px rgba(210,34,58,.8),0 0 30px rgba(210,34,58,.35);animation:tin .8s both}
+.tile img{width:100%;height:100%;object-fit:cover;object-position:50% 25%;display:block}
+.chip{position:absolute;left:8px;bottom:8px;background:rgba(15,27,30,.85);color:#F6E7E4;font:600 12px "DM Sans",sans-serif;padding:4px 10px;border-radius:99px}
+@keyframes tin{from{opacity:0;transform:translateY(30px) rotate(0) scale(.9)}to{opacity:1;transform:rotate(var(--r))}}
+#p2 .end{font:italic 500 24px/1.35 Fraunces,Georgia,serif;margin:0 0 28px}
+#p2 mark{background:linear-gradient(transparent 52%,rgba(210,34,58,.7) 52%);color:inherit;padding:0 3px}
+#lb{position:fixed;inset:0;z-index:80;background:rgba(8,14,16,.95);display:none;flex-direction:column;align-items:center;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px calc(env(safe-area-inset-bottom,0px) + 14px)}
+#lb.show{display:flex}
+#lb .q{font-size:23px;margin:0 0 12px;max-width:440px;text-align:center}
+#lb .dt{margin:6px 0}
+#lbw{flex:1;min-height:0;overflow:auto;width:100%;max-width:440px;border-radius:14px;box-shadow:0 0 0 2px rgba(210,34,58,.8),0 0 34px rgba(210,34,58,.35)}
+#lbw img{display:block;width:100%;height:auto}
+.nav{display:flex;gap:14px;margin-top:12px}
+.lbx{align-self:flex-end;width:40px;height:40px;border-radius:50%;border:0;background:#33434A;color:#fff;font-size:16px;cursor:pointer}
+#p3{display:none;text-align:center}
+#p3 .in{padding:34px 22px 60px}
+.pic{position:relative;width:min(62vw,250px);aspect-ratio:3/4;margin:0 auto 22px;border-radius:22px;overflow:hidden;border:5px solid var(--card);transition:filter .8s}
+.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.pic .rose{position:absolute;right:8px;bottom:2px;font-size:56px;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(8deg)}}
+.pic.dead{animation:shake .5s}
+.pic.dead img{filter:grayscale(1) brightness(.85)}
+.pic.dead .rose{display:none}
+.mala{position:absolute;inset:0;width:100%;height:100%;display:none;z-index:2;pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.pic.dead .mala{display:block;animation:drop .9s ease-out}
+@keyframes drop{from{transform:translateY(-70%);opacity:0}}
+#p3 h2{font-size:32px;font-style:italic}
+#p3 p{color:var(--soft)}
+.pair{display:flex;justify-content:center;margin:26px 0 8px}
+.pair img{width:34%;aspect-ratio:3/4;object-fit:cover;border-radius:14px;border:4px solid var(--card)}
+.pair img:first-child{transform:rotate(-5deg) translateX(8px)}.pair img:last-child{transform:rotate(4deg) translateX(-8px);margin-top:14px}
+.pick{display:flex;gap:12px;justify-content:center;margin:18px 0}
+.pick .btn{font-size:18px;padding:16px 22px}
+.pick .knife{background:#33434A}
+#out{min-height:90px;font:italic 500 21px/1.3 Fraunces,Georgia,serif;color:var(--ink)}
+#zoom{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;z-index:55;padding:24px}
+.zt{max-width:340px;text-align:center;font:italic 600 34px/1.2 Fraunces,Georgia,serif;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.75),0 0 3px rgba(0,0,0,.8);background:radial-gradient(closest-side,rgba(15,27,30,.7),rgba(15,27,30,0));padding:56px 28px;animation:zin 2.2s ease-out forwards}
+.zt small{display:block;font:500 14px "DM Sans",sans-serif;opacity:.85;margin-top:8px}
+@keyframes zin{0%{transform:scale(.3);opacity:0;filter:blur(8px)}18%{transform:scale(1.08);opacity:1;filter:none}70%{transform:scale(1.15);opacity:1}100%{transform:scale(1.9);opacity:0;filter:blur(4px)}}
+.mute{position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);right:10px;z-index:60;width:40px;height:40px;border-radius:50%;border:0;background:rgba(20,38,42,.8);color:#fff;font-size:17px;cursor:pointer}
+.fl{position:fixed;bottom:-40px;font-size:28px;pointer-events:none;z-index:70}
+@media (prefers-reduced-motion:reduce){.box.hit,.pic.dead,.pic .rose{animation:none}.rv{transition:none}}
+</style>
+</head>
+<body>
+<button class="mute" id="mute" aria-label="Music on or off">🔊</button>
+<div id="zoom"></div>
+<audio id="a1" loop preload="auto" src="music/audio-01.mp3"></audio><audio id="a2" preload="auto" src="music/audio-02.mp3"></audio>
+
+<section class="pg" id="p1"><div class="top">
+<h2>Jitna marna hai aap marlo, aap saara gussaa nikal lo aap</h2>
+<div class="box" id="box"><img data-img="me" alt="Saksham"></div>
+<div class="row"><b id="n">0</b><div class="msg"><span class="av">T</span><div class="bub" id="bub">Tap karo. Main yahin hoon.</div></div></div>
+<div id="choice"><button class="btn" id="go2">Aage chalo 🤍</button><button class="btn ghost" id="more">Aur maarungi</button></div>
+</div></section>
+
+<section class="pg" id="p2"><div class="in">
+<h2>Humari yaadein, Chocos.</h2>
+<p class="sub">Saari baatein, ek hi jagah. Kisi par bhi tap karo.</p>
+<div class="wall"><button class="tile" style="--r:-3deg;animation-delay:0.00s" aria-label="Memory 1"><img data-img="c1" alt=""><span class="chip">13/09</span></button><button class="tile" style="--r:2deg;animation-delay:0.15s" aria-label="Memory 2"><img data-img="c2" alt=""><span class="chip">15/09</span></button><button class="tile" style="--r:2.5deg;animation-delay:0.30s" aria-label="Memory 3"><img data-img="c3" alt=""><span class="chip">16/09</span></button><button class="tile" style="--r:-2deg;animation-delay:0.45s" aria-label="Memory 4"><img data-img="c4" alt=""><span class="chip">17/09</span></button><button class="tile" style="--r:-1.5deg;animation-delay:0.60s" aria-label="Memory 5"><img data-img="c5" alt=""><span class="chip">17/09</span></button><button class="tile" style="--r:3deg;animation-delay:0.75s" aria-label="Memory 6"><img data-img="c6" alt=""><span class="chip">27/09</span></button></div>
+<p class="end">Har message mein tum thi.<br>Har message mein main <mark>haar gaya</mark>.</p>
+<button class="btn" id="go3">Ab ek confession →</button>
+</div>
+<div id="lb"><button class="lbx" id="lbx" aria-label="Close">✕</button><p class="dt" id="lbd"></p><p class="q" id="lbq"></p><div id="lbw"><img id="lbi" alt=""></div><div class="nav"><button class="btn ghost" id="lbp">←</button><button class="btn ghost" id="lbn">→</button></div></div>
+</section>
+
+<section class="pg" id="p3"><div class="in">
+<div class="pic" id="pic"><img data-img="me" alt="Saksham"><span class="rose">🌹</span><svg class="mala" viewBox="0 0 100 133" preserveAspectRatio="none" aria-hidden="true"><path d="M14,62 Q50,150 86,62" fill="none" stroke="#F59E0B" stroke-width="9" stroke-linecap="round" stroke-dasharray="0 10"/><path d="M14,62 Q50,150 86,62" fill="none" stroke="#FDE047" stroke-width="6" stroke-linecap="round" stroke-dasharray="0 10" stroke-dashoffset="5"/><path d="M20,60 Q50,134 80,60" fill="none" stroke="#DC2626" stroke-width="7" stroke-linecap="round" stroke-dasharray="0 9"/></svg></div>
+<h2>Ek confession, Chocos.</h2>
+<p>Galti meri thi, aur maanne mein mujhe koi sharam nahi. Tum naraz hoti ho toh meri duniya ruk si jaati hai. Main tumhe ye gulaab deta hoon. Ab tum chuno.</p>
+<div class="pick" id="pick"><button class="btn" id="rose">🌹 Rose wapas</button><button class="btn knife" id="knife">🔪 Chaaku</button></div>
+<div id="out"></div>
+<div class="pair"><img data-img="hands" alt=""><img data-img="bangle" alt=""></div>
+</div></section>
+
+<script>
+const IMG={"c1":"photos/photo-01.jpg","c2":"photos/photo-02.jpg","c3":"photos/photo-03.jpg","c4":"photos/photo-04.jpg","c5":"photos/photo-05.jpg","c6":"photos/photo-06.jpg","me": "photos/photo-07.jpg", "hands": "photos/photo-08.jpg", "bangle": "photos/photo-09.jpg"};
+document.querySelectorAll('[data-img]').forEach(e=>e.src=IMG[e.dataset.img]);
+const $=id=>document.getElementById(id);
+/* music */
+const a1=$('a1'),a2=$('a2'),mu=$('mute');let muted=false,cur=a1;a1.volume=.7;a2.volume=.8;
+function fade(o,n){cur=n;if(muted)return;n.currentTime=0;n.play().catch(()=>{});let v=o.volume;const k=setInterval(()=>{v-=.05;if(v<=0){o.pause();o.volume=.7;clearInterval(k)}else o.volume=v},120)}
+mu.onclick=()=>{muted=!muted;mu.textContent=muted?'🔇':'🔊';muted?cur.pause():cur.play().catch(()=>{})};
+function hearts(e){for(let k=0;k<28;k++){const f=document.createElement('span');f.className='fl';f.textContent=e[k%e.length];f.style.left=Math.random()*95+'vw';document.body.appendChild(f);
+ f.animate([{transform:'translateY(0)',opacity:1},{transform:`translateY(-${60+Math.random()*50}vh) rotate(${Math.random()*60-30}deg)`,opacity:0}],{duration:2200+Math.random()*1800,delay:Math.random()*600,fill:'both'}).onfinish=()=>f.remove()}}
+/* part 1: slap, each slap shows one of her real messages */
+const L=[['Mujhe aap kese bhi chloge. Bas aap.','17/09/26'],['Nhii peechaa chodvana mujhe','16/09'],['Aapke sath hii rehna hai abb','16/09'],['Haan haar gai mei 🥹','16/09/26'],['Aapko kyu glat treat krungi kisi aur ki galti pr','17/09/26'],['Aap bhi toh acche ho. Best ho aap.','17/09/26'],['Mujhe hogya pyaar! Haar gaii sab mei ❤️','17/09/26'],['Aapke liye kuch bhi','17/09/26'],['Already more than enough krrhe aap','15/09/26'],['Aapko maarungi baad mei khud regret krungi','17/09/26'],['Pyaar toh above avg hai 😂','27/09/26'],['I love you too ❤️','17/09/26']];
+const box=$('box');let c=0,ac;
+function thwap(){try{ac=ac||new AudioContext();const l=ac.sampleRate*.12,b=ac.createBuffer(1,l,ac.sampleRate),d=b.getChannelData(0);
+ for(let k=0;k<l;k++)d[k]=(Math.random()*2-1)*Math.pow(1-k/l,3);
+ const s=ac.createBufferSource(),f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=2200;s.buffer=b;s.connect(f);f.connect(ac.destination);s.start()}catch(e){}}
+box.addEventListener('pointerdown',e=>{
+ if(a1.paused&&!muted&&cur===a1)a1.play().catch(()=>{});
+ const r=box.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+ const h=document.createElement('div');h.className='hand';h.textContent='🖐️';h.style.left=x+'px';h.style.top=y+'px';box.appendChild(h);
+ h.animate([{transform:'translate(calc(-50% + 150px),calc(-50% - 50px)) rotate(35deg) scale(.9)',opacity:0},{transform:'translate(-50%,-50%) rotate(-14deg) scale(1.1)',opacity:1,offset:.5},{transform:'translate(-50%,-50%) rotate(-14deg) scale(1.1)',opacity:1,offset:.75},{transform:'translate(-50%,-50%) rotate(-14deg) scale(1)',opacity:0}],{duration:520,easing:'ease-in'}).onfinish=()=>h.remove();
+ setTimeout(()=>{const m=document.createElement('div');m.className='mark';m.style.left=x+'px';m.style.top=y+'px';box.appendChild(m);
+  const ms=box.querySelectorAll('.mark');if(ms.length>10)ms[0].remove();
+  box.classList.remove('hit');void box.offsetWidth;box.classList.add('hit');thwap();navigator.vibrate&&navigator.vibrate(40)},230);
+ const m=L[c%L.length];c++;$('n').textContent=c;
+ const b=$('bub');b.innerHTML=m[0]+'<small>Tanu · '+m[1]+'</small>';b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop');zm(m);
+ if(c>=5)$('choice').classList.add('show')});
+function zm(m){const z=$('zoom');z.innerHTML='';const d=document.createElement('div');d.className='zt';d.innerHTML=m[0]+'<small>Tanu · '+m[1]+'</small>';z.appendChild(d)}
+$('more').onclick=()=>{$('bub').textContent='Haan haan, maaro. Main kahin nahi ja raha.'};
+/* pages */
+function go(n){$('p1').style.display=n==1?'flex':'none';$('p2').style.display=n==2?'block':'none';$('p3').style.display=n==3?'block':'none';
+ const p=$('p'+n);p.scrollTop=0;if(n==3){fade(a1,a2);hearts(['🌹'])}}
+$('go2').onclick=()=>{go(2);hearts(['🤍'])};
+$('go3').onclick=()=>go(3);
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{root:$('p2'),threshold:.15});
+document.querySelectorAll('.rv').forEach(e=>io.observe(e));
+const Q=[['13/09/26','<mark>I love you…..</mark> 🥹🫶'],['15/09/26','<mark>Already more than enough</mark> krrhe aap'],['16/09/26','Kii koi kisi ko itna pyaar kese kr sktaa… <mark>Haan haar gai mei</mark>'],['17/09/26','Jo mujhe itna pyar krta woh nii lyak hoga toh <mark>kon hoga</mark>'],['17/09/26','Mujhe hogya pyaar! <mark>Haar gaii sab mei</mark> ❤️'],['27/09/26','<mark>I love you</mark> 💞']];let li=0;
+function lb(i){li=(i+6)%6;$('lbi').src=IMG['c'+(li+1)];$('lbq').innerHTML=Q[li][1];$('lbd').textContent=Q[li][0];$('lbw').scrollTop=0;$('lb').classList.add('show')}
+document.querySelectorAll('.tile').forEach((e,i)=>e.onclick=()=>lb(i));
+$('lbx').onclick=()=>$('lb').classList.remove('show');$('lbp').onclick=()=>lb(li-1);$('lbn').onclick=()=>lb(li+1);
+/* part 3: rose or knife */
+$('rose').onclick=()=>{$('pic').classList.remove('dead');$('out').textContent='Maaf kar diya? Thank you, my life. Ab main hamesha tumhara servant. I love you, Chocos 🤍';hearts(['🌹','🤍','❤️']);$('pick').style.display='none'};
+$('knife').onclick=()=>{const p=$('pic');p.classList.remove('dead');void p.offsetWidth;p.classList.add('dead');
+ $('out').innerHTML='🪔 Swargiya Saksham 🪔<br>Mera koi wajood nahi aapke bina… 🥀<br>Last words: I love you, Chocos.<br><button class="btn ghost" id="rev" style="margin-top:12px">Bhoot ban ke wapas aaunga 👻</button>';
+ $('rev').onclick=()=>{p.classList.remove('dead');$('out').textContent='Phir se chuno, Chocos. 🌹 ya 🔪?'}};
+</script>
+</body>
+</html>
